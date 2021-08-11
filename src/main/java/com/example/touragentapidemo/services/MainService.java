@@ -18,10 +18,14 @@ import java.util.UUID;
 
 @Service
 public class MainService {
-    @Autowired
-    RabbitTemplate rabbitTemplate;
-    @Autowired
-    ImageService imageService;
+
+    private final RabbitTemplate rabbitTemplate;
+    private final ImageService imageService;
+
+    public MainService(RabbitTemplate rabbitTemplate, ImageService imageService) {
+        this.rabbitTemplate = rabbitTemplate;
+        this.imageService = imageService;
+    }
 
     public void putOffersToQueue(OfferDTO offerDTO, long usersRequestsId){
         File image = convertOfferDtoToImage(offerDTO);

@@ -1,20 +1,20 @@
 package com.example.touragentapidemo.services;
 
 import com.example.touragentapidemo.enums.RequestStatus;
-import com.example.touragentapidemo.models.Request;
 import com.example.touragentapidemo.models.UsersRequests;
 import com.example.touragentapidemo.repositories.UsersRequestsRepo;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class StopService {
-    @Autowired
-    UsersRequestsRepo usersRequestsRepo;
+    private final UsersRequestsRepo usersRequestsRepo;
+
+    public StopService(UsersRequestsRepo usersRequestsRepo) {
+        this.usersRequestsRepo = usersRequestsRepo;
+    }
 
     @RabbitListener(queues = "stop_queue")
     public void listen(String requestId) {

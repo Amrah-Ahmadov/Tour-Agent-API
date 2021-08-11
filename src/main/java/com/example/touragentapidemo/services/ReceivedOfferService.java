@@ -11,8 +11,11 @@ import java.util.Map;
 
 @Service
 public class ReceivedOfferService {
-    @Autowired
-    UsersRequestsRepo usersRequestsRepo;
+    private final UsersRequestsRepo usersRequestsRepo;
+
+    public ReceivedOfferService(UsersRequestsRepo usersRequestsRepo) {
+        this.usersRequestsRepo = usersRequestsRepo;
+    }
 
     @RabbitListener(queues = "accepted_offer_queue")
     public void listen(Map<String, String> acceptedMap) {

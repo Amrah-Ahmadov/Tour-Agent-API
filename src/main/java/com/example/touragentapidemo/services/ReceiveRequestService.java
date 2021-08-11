@@ -29,9 +29,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReceiveRequestService {
-    UserRepo userRepo;
-    RequestRepo requestRepo;
-    UsersRequestsRepo usersRequestsRepo;
+    private final UserRepo userRepo;
+    private final RequestRepo requestRepo;
+    private final UsersRequestsRepo usersRequestsRepo;
     @Value("${request.duration}")
     private long duration;
     @Value("#{ T(java.time.LocalTime).parse('${work-hours.start-time}')}")

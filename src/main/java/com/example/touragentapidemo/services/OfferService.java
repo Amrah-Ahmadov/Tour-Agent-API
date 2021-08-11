@@ -5,17 +5,16 @@ import com.example.touragentapidemo.mappers.MapperModel;
 import com.example.touragentapidemo.models.Offer;
 import com.example.touragentapidemo.models.UsersRequests;
 import com.example.touragentapidemo.repositories.OfferRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OfferService {
-    private OfferRepo offerRepo;
-    @Autowired
-    MapperModel mapperModel;
+    private final OfferRepo offerRepo;
+    private final MapperModel mapperModel;
 
-    public OfferService(OfferRepo offerRepo) {
+    public OfferService(OfferRepo offerRepo, MapperModel mapperModel) {
         this.offerRepo = offerRepo;
+        this.mapperModel = mapperModel;
     }
     public void saveOffer(Offer offer){
         offerRepo.saveAndFlush(offer);

@@ -28,16 +28,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/requests")
 public class RequestController {
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private RequestsService requestsService;
-    @Autowired
-    MainService service;
-    @Autowired
-    OfferService offerService;
-    @Autowired
-    private MapperModel mapperModel;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final RequestsService requestsService;
+    private final MainService service;
+    private final OfferService offerService;
+    private final MapperModel mapperModel;
+
+    public RequestController(JwtTokenUtil jwtTokenUtil, RequestsService requestsService, MainService service, OfferService offerService, MapperModel mapperModel) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.requestsService = requestsService;
+        this.service = service;
+        this.offerService = offerService;
+        this.mapperModel = mapperModel;
+    }
 
     @GetMapping
     public ResponseEntity<List<UsersRequestsDto>> getAllRequestsForUser(HttpServletRequest request) throws BadHttpRequest {

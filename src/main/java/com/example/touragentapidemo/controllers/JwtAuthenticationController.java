@@ -6,7 +6,6 @@ import com.example.touragentapidemo.jwt.JwtUserDetailsService;
 import com.example.touragentapidemo.models.User;
 import com.example.touragentapidemo.repositories.UserRepo;
 import com.example.touragentapidemo.utils.JwtTokenUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,20 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class JwtAuthenticationController {
 
-    private UserRepo repo;
+    private final UserRepo repo;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtUserDetailsService userDetailsService;
 
-    public JwtAuthenticationController(UserRepo repo){
+    public JwtAuthenticationController(UserRepo repo, AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService){
         this.repo = repo;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
     }
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
 
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
